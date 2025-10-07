@@ -1,19 +1,21 @@
 @import "tailwindcss";
 
 :root {
-  --background: #fef7f7;
-  --foreground: #581c87;
-  --primary: #ec4899;
-  --secondary: #a855f7;
-  --accent: #f472b6;
+  --background: #c2b8aa;
+  --foreground: #beae94;
+  --primary: #3a3122;
+  --secondary: #555555;
+  --accent: #443a28;
+  --highlight: #885d14;
 }
 
 .dark {
-  --background: #1a0b2e;
-  --foreground: #fce7f3;
-  --primary: #f472b6;
-  --secondary: #c084fc;
-  --accent: #ec4899;
+  --background: #c2b8aa;
+  --foreground: #beae94;
+  --primary: #3a3122;
+  --secondary: #dddddd;
+  --accent: #443a28;
+  --highlight: #885d14;
 }
 
 @theme inline {
@@ -22,17 +24,19 @@
   --color-primary: var(--primary);
   --color-secondary: var(--secondary);
   --color-accent: var(--accent);
+  --color-highlight: var(--highlight);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
 }
 
 @media (prefers-color-scheme: dark) {
   :root:not(.dark):not(.light) {
-    --background: #1a0b2e;
-    --foreground: #fce7f3;
-    --primary: #f472b6;
-    --secondary: #c084fc;
-    --accent: #ec4899;
+    --background: #c2b8aa;
+    --foreground: #beae94;
+    --primary: #3a3122;
+    --secondary: #555555;
+    --accent: #443a28;
+    --highlight: #885d14;
   }
 }
 
@@ -46,76 +50,3 @@ body {
   font-family: Arial, Helvetica, sans-serif;
 }
 
-/* Force dark mode styles */
-.dark body {
-  background: #1a0b2e !important;
-  color: #fce7f3 !important;
-}
-
-/* Navigation bar dark mode */
-.dark .bg-pink-50 {
-  background-color: #581c87 !important;
-}
-
-.dark .border-pink-200 {
-  border-color: #a855f7 !important;
-}
-
-.dark .text-purple-800 {
-  color: #fce7f3 !important;
-}
-
-.dark .text-pink-500 {
-  color: #f472b6 !important;
-}
-
-/* Main page dark mode */
-.dark .bg-gradient-to-br {
-  background: linear-gradient(to bottom right, #581c87, #ec4899) !important;
-}
-
-.dark .text-purple-800 {
-  color: #fce7f3 !important;
-}
-
-.dark .text-purple-600 {
-  color: #f472b6 !important;
-}
-
-.dark .text-purple-700 {
-  color: #fce7f3 !important;
-}
-
-/* Button dark mode */
-.dark .bg-pink-500 {
-  background-color: #f472b6 !important;
-}
-
-.dark .bg-pink-100 {
-  background-color: #581c87 !important;
-}
-
-.dark .border-pink-300 {
-  border-color: #f472b6 !important;
-}
-
-.dark .border-purple-300 {
-  border-color: #c084fc !important;
-}
-
-.dark .hover\:bg-pink-200:hover {
-  background-color: #a855f7 !important;
-}
-
-.dark .hover\:bg-purple-100:hover {
-  background-color: #581c87 !important;
-}
-
-/* Footer dark mode */
-.dark .text-purple-600 {
-  color: #f472b6 !important;
-}
-
-.dark .hover\:text-purple-800:hover {
-  color: #fce7f3 !important;
-}
