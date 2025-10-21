@@ -37,8 +37,8 @@ const ProductCard = ({ product }: { product: Product }) => {
             ${product.price}
           </span>
           
-          <button className="flex items-center justify-center gap-2 bg-accent text-secondary px-4 py-2 rounded-lg transition-colors duration-200 w-full sm:w-auto">
-            <CartIcon size={16} color="#ffffff" className="w-4 h-4" />
+          <button className="flex items-center justify-center gap-2 bg-accent text-background px-4 py-2 rounded-lg transition-colors duration-200 w-full sm:w-auto">
+            <CartIcon size={16} color="#c2b8aa" className="w-4 h-4" />
             Add to Cart
           </button>
         </div>
