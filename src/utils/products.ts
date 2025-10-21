@@ -5,7 +5,12 @@ export const products = [
     description: "A soothing blend of lavender and vanilla that creates the perfect atmosphere for relaxation and sleep.",
     price: 24.99,
     rating: 4.8,
-    image: "https://velasmariat.com/cdn/shop/files/DSC_1361_ed4996fd-7d1e-4034-9bf8-960a16c636be_1024x1024@2x.jpg?v=1710018042",
+    images: [
+      "https://res.cloudinary.com/de3taspqp/image/upload/v1760476763/hrlezkc02zlagweeqd0s.png", 
+      "https://res.cloudinary.com/de3taspqp/image/upload/v1760476763/otuqg8siafzhvtde1fab.png", 
+      "https://res.cloudinary.com/de3taspqp/image/upload/v1760476763/ikkezpmfuz7saqrudymq.png", 
+      "https://res.cloudinary.com/de3taspqp/image/upload/v1760476763/smyfk5lbhkounkhlsede.png", 
+    ],
     reviews: 127
   },
   {
@@ -14,7 +19,12 @@ export const products = [
     description: "Elegant rose petals combined with subtle jasmine notes for a romantic and luxurious ambiance.",
     price: 29.99,
     rating: 4.9,
-    image: "https://velasmariat.com/cdn/shop/articles/DSC_3807_300x300.jpg?v=1633559114",
+    images: [
+      "https://res.cloudinary.com/de3taspqp/image/upload/v1760476763/owl03sq6pbqotkwbsmr5.png", 
+      "https://res.cloudinary.com/de3taspqp/image/upload/v1760476763/wv0nmfmymmns2vfko2bq.png", 
+      "https://res.cloudinary.com/de3taspqp/image/upload/v1760476763/o2yizrgtjdhwnmydcsxc.png", 
+      "https://res.cloudinary.com/de3taspqp/image/upload/v1760476764/njhinexc9mtvkxhxmx9p.png",  
+    ],
     reviews: 89
   },
   {
@@ -23,7 +33,12 @@ export const products = [
     description: "Fresh sea salt and ocean air scents that bring the calming essence of the coast to your home.",
     price: 22.99,
     rating: 4.7,
-    image: "https://velasart.com/wp-content/uploads/2023/02/many-candles-burning-at-night-many-candle-flames-2022-10-04-18-19-37-utc.jpg",
+    images: [
+      "https://res.cloudinary.com/de3taspqp/image/upload/v1760476764/qm9wuxgfk2ygjwfxweb2.png", 
+      "https://res.cloudinary.com/de3taspqp/image/upload/v1760476764/fdmxkpckpzyzivmir9kb.png", 
+      "https://res.cloudinary.com/de3taspqp/image/upload/v1760476764/dhulm9mqnbnudry9zp5x.png", 
+      "https://res.cloudinary.com/de3taspqp/image/upload/v1760476764/dhulm9mqnbnudry9zp5x.png", 
+    ],
     reviews: 156
   },
   {
@@ -32,25 +47,12 @@ export const products = [
     description: "Rich, creamy vanilla with hints of caramel - perfect for creating a warm, cozy atmosphere.",
     price: 19.99,
     rating: 4.6,
-    image: "https://velasart.com/wp-content/uploads/2023/03/Tea-Descripcion-1.png",
+    images: [
+      "https://res.cloudinary.com/de3taspqp/image/upload/v1760476764/cpfjgwvxtemvwto9luzx.png",  
+      "https://res.cloudinary.com/de3taspqp/image/upload/v1760476771/u1ql3abzpdechntdbf8y.png", 
+      "https://res.cloudinary.com/de3taspqp/image/upload/v1760476764/tuubmarpfqeensts9dhd.png", 
+      "https://res.cloudinary.com/de3taspqp/image/upload/v1760476766/kj6coknprjljjacyes7n.png", 
+    ],
     reviews: 203
   },
-  {
-    id: 5,
-    name: "Citrus Burst",
-    description: "Energizing blend of lemon, orange, and grapefruit that brightens any space with fresh vibrancy.",
-    price: 21.99,
-    rating: 4.5,
-    image: "https://velasart.com/wp-content/uploads/2023/02/burning-advent-candles-2022-11-10-18-01-32-utc.jpg",
-    reviews: 94
-  },
-  {
-    id: 6,
-    name: "Sandalwood Serenity",
-    description: "Exotic sandalwood and patchouli create a meditative atmosphere perfect for mindfulness and focus.",
-    price: 27.99,
-    rating: 4.8,
-    image: "https://velasart.com/wp-content/uploads/2023/02/colorful-stick-candles-arranged-on-shelves-and-sor-2022-05-11-05-37-51-utc.jpg",
-    reviews: 78
-  }
 ];

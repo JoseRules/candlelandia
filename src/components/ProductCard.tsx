@@ -1,13 +1,16 @@
+'use client'
 import Image from "next/image";
 import StarRating from "./StartRating";
 import { CartIcon } from "@/assets/icons";
+import { useRouter } from "next/navigation";
 
 const ProductCard = ({ product }: { product: Product }) => {
+  const router = useRouter();
   return (
-    <div className="rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 overflow-hidden">
+    <div className="rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 overflow-hidden cursor-pointer" onClick={() => router.push(`/candle/${product.id}`)}>
       {/* Product Image */}
-      <div className="relative h-48 bg-gradient-to-br from-pink-100 to-purple-100 dark:from-purple-700 dark:to-pink-700">
-        <img src={product.image} alt={product.name} className="object-cover w-full h-full" />
+      <div className="relative h-48">
+        <img src={product.images[0]} alt={product.name} className="object-cover w-full h-full" />
       </div>
       <div className="p-4">
         <h3 className="text-lg font-semibold text-primary mb-2">

@@ -4,6 +4,6 @@ type Product = {
   description: string;
   price: number;
   rating: number;
-  image: string;
+  images: string[];
   reviews: number;
 }
