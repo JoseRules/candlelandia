@@ -5,10 +5,12 @@ import { products } from "@/utils/products";
 import StarRating from "@/components/StartRating";
 import { CartIcon } from "@/assets/icons";
 import { use } from "react";
+import { useCart } from "@/contexts/CartContext";
 
 export default function CandlePage({params}: {params: Promise<{ id: string }>}) {
   const { id } = use(params);
   const router = useRouter();
+  const { addToCart } = useCart();
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
 
   // Find the product by ID
@@ -44,7 +46,7 @@ export default function CandlePage({params}: {params: Promise<{ id: string }>}) 
   };
 
   return (
-    <div className="min-h-screen bg-secondary py-12 px-4">
+    <div className="min-h-screen bg-foreground py-12 px-4">
       <div className="max-w-7xl mx-auto">
         {/* Back Button */}
         <button 
@@ -187,7 +189,10 @@ export default function CandlePage({params}: {params: Promise<{ id: string }>}) 
 
             {/* Add to Cart Button */}
             <div className="pt-6">
-              <button className="w-full flex items-center justify-center gap-3 bg-accent hover:opacity-90 text-secondary text-lg font-semibold px-8 py-4 rounded-lg transition-all duration-200 shadow-lg hover:shadow-xl transform hover:scale-105">
+              <button 
+                onClick={() => addToCart(product)}
+                className="w-full flex items-center justify-center gap-3 bg-accent hover:opacity-90 text-white text-lg font-semibold px-8 py-4 rounded-lg transition-all duration-200 shadow-lg hover:shadow-xl transform hover:scale-105"
+              >
                 <CartIcon size={24} color="#ffffff" className="w-6 h-6" />
                 Add to Cart
               </button>
