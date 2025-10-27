@@ -1,18 +1,18 @@
 export const products = [
   {
     id: 1,
-    name: "Lavender Dreams",
-    description: "A soothing blend of lavender and vanilla that creates the perfect atmosphere for relaxation and sleep.",
-    price: 24.99,
-    rating: 4.8,
+    name: "Desierto",
+    description: "Vive la experiencia de un desierto en tu casa.",
+    price: 100.00,
+    rating: 4.9,
     images: [
-      "https://res.cloudinary.com/de3taspqp/image/upload/v1760476763/hrlezkc02zlagweeqd0s.png", 
-      "https://res.cloudinary.com/de3taspqp/image/upload/v1760476763/otuqg8siafzhvtde1fab.png", 
-      "https://res.cloudinary.com/de3taspqp/image/upload/v1760476763/ikkezpmfuz7saqrudymq.png", 
-      "https://res.cloudinary.com/de3taspqp/image/upload/v1760476763/smyfk5lbhkounkhlsede.png", 
+      "https://res.cloudinary.com/de3taspqp/image/upload/v1761606001/nyc3cojms2f2hzq1quo3.jpg", 
+      "https://res.cloudinary.com/de3taspqp/image/upload/v1761606001/epkw7mxv6irmdmvaa8od.jpg", 
+      "https://res.cloudinary.com/de3taspqp/image/upload/v1761606001/cmscffiumpbgdcvqlxz4.jpg", 
+      "https://res.cloudinary.com/de3taspqp/image/upload/v1761606001/dq4x5ul4d1xyzewmcuco.jpg", 
     ],
-    reviews: 127
-  },
+    reviews: 1
+  },/*
   {
     id: 2,
     name: "Rose Garden",
@@ -54,5 +54,5 @@ export const products = [
       "https://res.cloudinary.com/de3taspqp/image/upload/v1760476766/kj6coknprjljjacyes7n.png", 
     ],
     reviews: 203
-  },
+  },*/
 ];

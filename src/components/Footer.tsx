@@ -9,21 +9,21 @@ export default function Footer() {
             href="#"
           >
             <CandleIcon size={20} color="#885d14" className="w-6 h-6" />
-            About Us
+            Acerca de nosotros
           </a>
           <a
             className="flex items-center gap-2 hover:underline hover:underline-offset-4 hover:text-purple-800 dark:hover:text-pink-200 transition-colors"
             href="#"
           >
             <CandleIcon size={20} color="#885d14" className="w-6 h-6" />
-            Collections
+            Colecciones
           </a>
           <a
             className="flex items-center gap-2 hover:underline hover:underline-offset-4 hover:text-purple-800 dark:hover:text-pink-200 transition-colors"
             href="#"
           >
             <CandleIcon size={20} color="#885d14" className="w-6 h-6" />
-            Contact →
+            Contacto →
           </a>
         </div>
       </footer>
