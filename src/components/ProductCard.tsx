@@ -3,11 +3,24 @@ import Image from "next/image";
 import StarRating from "./StartRating";
 import { CartIcon } from "@/assets/icons";
 import { useRouter } from "next/navigation";
+import { useCart } from "@/contexts/CartContext";
+import { Product } from "@/utils/types";
 
 const ProductCard = ({ product }: { product: Product }) => {
   const router = useRouter();
+  const { addToCart } = useCart();
+
+  const handleCardClick = () => {
+    router.push(`/candle/${product.id}`);
+  };
+
+  const handleAddToCart = (e: React.MouseEvent) => {
+    e.stopPropagation(); // Prevent triggering the card click
+    addToCart(product);
+  };
+
   return (
-    <div className="rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 overflow-hidden cursor-pointer" onClick={() => router.push(`/candle/${product.id}`)}>
+    <div className="rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 overflow-hidden cursor-pointer" onClick={handleCardClick}>
       {/* Product Image */}
       <div className="relative h-48">
         <img src={product.images[0]} alt={product.name} className="object-cover w-full h-full" />
@@ -37,8 +50,11 @@ const ProductCard = ({ product }: { product: Product }) => {
             ${product.price}
           </span>
           
-          <button className="flex items-center justify-center gap-2 bg-accent text-background px-4 py-2 rounded-lg transition-colors duration-200 w-full sm:w-auto">
-            <CartIcon size={16} color="#c2b8aa" className="w-4 h-4" />
+          <button 
+            onClick={handleAddToCart}
+            className="flex items-center justify-center gap-2 bg-accent text-white px-4 py-2 rounded-lg transition-colors duration-200 hover:opacity-90 w-full sm:w-auto"
+          >
+            <CartIcon size={16} color="#ffffff" className="w-4 h-4" />
             Add to Cart
           </button>
         </div>
