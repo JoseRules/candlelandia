@@ -21,8 +21,7 @@ export default function CartModal({
   if (!isOpen) return null;
 
   const subtotal = cartItems.reduce((sum, item) => sum + item.price * item.quantity, 0);
-  const tax = subtotal * 0.08; // 8% tax
-  const total = subtotal + tax;
+  const total = subtotal;
 
   return (
     <>
@@ -38,7 +37,7 @@ export default function CartModal({
           <div className="sticky top-0 border-b border-gray-200 p-6 flex items-center justify-between z-10">
             <h2 className="text-2xl font-bold text-primary flex items-center gap-2">
               <CartIcon size={24} color="#3a3122" className="w-6 h-6" />
-              Shopping Cart
+              Carrito de compras
             </h2>
             <button
               onClick={onClose}
@@ -55,13 +54,13 @@ export default function CartModal({
             {cartItems.length === 0 ? (
               <div className="flex flex-col items-center justify-center py-20 text-center">
                 <CartIcon size={64} color="#c2b8aa" className="w-16 h-16 mb-4 opacity-50" />
-                <h3 className="text-xl font-semibold text-primary mb-2">Your cart is empty</h3>
-                <p className="text-highlight mb-6">Add some candles to get started!</p>
+                <h3 className="text-xl font-semibold text-primary mb-2">Tu carrito está vacío</h3>
+                <p className="text-highlight mb-6">Agrega algunas velas para empezar!</p>
                 <button
                   onClick={onClose}
                   className="bg-accent text-secondary px-6 py-3 rounded-lg hover:opacity-90 transition-opacity font-medium"
                 >
-                  Continue Shopping
+                  Continuar Comprando
                 </button>
               </div>
             ) : (
@@ -131,10 +130,6 @@ export default function CartModal({
                     <span>Subtotal</span>
                     <span>${subtotal.toFixed(2)}</span>
                   </div>
-                  <div className="flex justify-between text-highlight">
-                    <span>Tax</span>
-                    <span>${tax.toFixed(2)}</span>
-                  </div>
                   <div className="flex justify-between text-xl font-bold text-primary pt-3 border-t border-gray-200">
                     <span>Total</span>
                     <span>${total.toFixed(2)}</span>
@@ -143,7 +138,7 @@ export default function CartModal({
 
                 {/* Checkout Button */}
                 <button className="w-full bg-accent hover:opacity-90 text-secondary text-lg font-semibold py-4 rounded-lg transition-all duration-200 shadow-lg hover:shadow-xl mt-6">
-                  Proceed to Checkout
+                  Continuar la orden
                 </button>
               </>
             )}

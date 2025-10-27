@@ -1,13 +1,11 @@
 'use client';
 
-import { useState } from 'react';
 import { CandleIcon, CartIcon } from '@/assets/icons';
 import { useCart } from '@/contexts/CartContext';
 import CartModal from './CartModal';
 
 export default function TopNav() {
-  const [isCartOpen, setIsCartOpen] = useState(false);
-  const { cartItems, removeFromCart, updateQuantity, getTotalItems } = useCart();
+  const { cartItems, removeFromCart, updateQuantity, getTotalItems, isCartOpen, setIsCartOpen } = useCart();
   const totalItems = getTotalItems();
 
   return (

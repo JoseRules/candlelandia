@@ -1,8 +1,7 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
-import TopNav from "@/components/TopNav";
-import { CartProvider } from "@/contexts/CartContext";
+import ClientLayout from "./ClientLayout";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -15,8 +14,8 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Candlelandia",
-  description: "Your destination for premium candles",
+  title: "Glow Gdl",
+  description: "La mejor experiencia en velas",
 };
 
 export default function RootLayout({
@@ -29,10 +28,7 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        <CartProvider>
-          <TopNav />
-          {children}
-        </CartProvider>
+        <ClientLayout>{children}</ClientLayout>
       </body>
     </html>
   );

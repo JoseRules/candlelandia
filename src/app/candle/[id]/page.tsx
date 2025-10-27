@@ -138,7 +138,7 @@ export default function CandlePage({params}: {params: Promise<{ id: string }>}) 
               <div className="flex items-center gap-3 mb-4">
                 <StarRating rating={product.rating} />
                 <span className="text-lg text-highlight">
-                  {product.rating} ({product.reviews} reviews)
+                  {product.rating} ({product.reviews} calificaciones)
                 </span>
               </div>
 
@@ -150,7 +150,7 @@ export default function CandlePage({params}: {params: Promise<{ id: string }>}) 
 
             {/* Description */}
             <div className="border-t border-b border-gray-200 py-6">
-              <h2 className="text-xl font-semibold text-primary mb-3">Description</h2>
+              <h2 className="text-xl font-semibold text-primary mb-3">Descripción</h2>
               <p className="text-highlight text-lg leading-relaxed">
                 {product.description}
               </p>
@@ -158,31 +158,31 @@ export default function CandlePage({params}: {params: Promise<{ id: string }>}) 
 
             {/* Product Features */}
             <div className="space-y-3">
-              <h3 className="text-lg font-semibold text-primary">Features</h3>
+              <h3 className="text-lg font-semibold text-primary">Características</h3>
               <ul className="space-y-2 text-highlight">
                 <li className="flex items-center gap-2">
                   <svg className="w-5 h-5 text-accent" fill="currentColor" viewBox="0 0 20 20">
                     <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
                   </svg>
-                  Hand-poured with natural soy wax
+                  Artesanal y 100% natural
                 </li>
                 <li className="flex items-center gap-2">
                   <svg className="w-5 h-5 text-accent" fill="currentColor" viewBox="0 0 20 20">
                     <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
                   </svg>
-                  40-50 hours burn time
+                  40-50 horas de quemado
                 </li>
                 <li className="flex items-center gap-2">
                   <svg className="w-5 h-5 text-accent" fill="currentColor" viewBox="0 0 20 20">
                     <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
                   </svg>
-                  Premium fragrance oils
+                  Aceites de fragancia premium
                 </li>
                 <li className="flex items-center gap-2">
                   <svg className="w-5 h-5 text-accent" fill="currentColor" viewBox="0 0 20 20">
                     <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
                   </svg>
-                  Eco-friendly and sustainable
+                  Eco-friendly y sostenible
                 </li>
               </ul>
             </div>
@@ -194,11 +194,11 @@ export default function CandlePage({params}: {params: Promise<{ id: string }>}) 
                 className="w-full flex items-center justify-center gap-3 bg-accent hover:opacity-90 text-white text-lg font-semibold px-8 py-4 rounded-lg transition-all duration-200 shadow-lg hover:shadow-xl transform hover:scale-105"
               >
                 <CartIcon size={24} color="#ffffff" className="w-6 h-6" />
-                Add to Cart
+                Agregar al carrito
               </button>
             </div>
 
-            {/* Additional Info */}
+            {/* Additional Info 
             <div className="bg-gray-50 rounded-lg p-4 text-sm text-highlight space-y-2">
               <p className="flex items-center gap-2">
                 <svg className="w-5 h-5 text-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -213,6 +213,7 @@ export default function CandlePage({params}: {params: Promise<{ id: string }>}) 
                 30-day satisfaction guarantee
               </p>
             </div>
+            */}
           </div>
         </div>
       </div>

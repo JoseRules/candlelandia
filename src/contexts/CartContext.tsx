@@ -13,29 +13,47 @@ interface CartContextType {
   removeFromCart: (productId: number) => void;
   updateQuantity: (productId: number, quantity: number) => void;
   getTotalItems: () => number;
+  confirmationItem: CartItem | null;
+  isConfirmationOpen: boolean;
+  closeConfirmation: () => void;
+  isCartOpen: boolean;
+  setIsCartOpen: (value: boolean) => void;
 }
 
 const CartContext = createContext<CartContextType | undefined>(undefined);
 
 export function CartProvider({ children }: { children: ReactNode }) {
   const [cartItems, setCartItems] = useState<CartItem[]>([]);
+  const [confirmationItem, setConfirmationItem] = useState<CartItem | null>(null);
+  const [isConfirmationOpen, setIsConfirmationOpen] = useState(false);
+  const [isCartOpen, setIsCartOpen] = useState(false);
 
   const addToCart = (product: Product) => {
     setCartItems((prevItems) => {
       const existingItem = prevItems.find((item) => item.id === product.id);
+      let updatedItem: CartItem;
       
       if (existingItem) {
         // If item already exists, increase quantity
-        return prevItems.map((item) =>
-          item.id === product.id
-            ? { ...item, quantity: item.quantity + 1 }
-            : item
+        updatedItem = { ...existingItem, quantity: existingItem.quantity + 1 };
+        const updatedItems = prevItems.map((item) =>
+          item.id === product.id ? updatedItem : item
         );
+        setConfirmationItem(updatedItem);
+        setIsConfirmationOpen(true);
+        return updatedItems;
       } else {
         // If item doesn't exist, add it with quantity 1
-        return [...prevItems, { ...product, quantity: 1 }];
+        updatedItem = { ...product, quantity: 1 };
+        setConfirmationItem(updatedItem);
+        setIsConfirmationOpen(true);
+        return [...prevItems, updatedItem];
       }
     });
+  };
+
+  const closeConfirmation = () => {
+    setIsConfirmationOpen(false);
   };
 
   const removeFromCart = (productId: number) => {
@@ -67,6 +85,11 @@ export function CartProvider({ children }: { children: ReactNode }) {
         removeFromCart,
         updateQuantity,
         getTotalItems,
+        confirmationItem,
+        isConfirmationOpen,
+        closeConfirmation,
+        isCartOpen,
+        setIsCartOpen,
       }}
     >
       {children}

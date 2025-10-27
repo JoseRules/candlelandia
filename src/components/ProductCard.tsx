@@ -55,7 +55,7 @@ const ProductCard = ({ product }: { product: Product }) => {
             className="flex items-center justify-center gap-2 bg-accent text-white px-4 py-2 rounded-lg transition-colors duration-200 hover:opacity-90 w-full sm:w-auto"
           >
             <CartIcon size={16} color="#ffffff" className="w-4 h-4" />
-            Add to Cart
+            Agregar
           </button>
         </div>
       </div>
