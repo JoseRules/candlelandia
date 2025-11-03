@@ -1,14 +1,16 @@
 'use client';
 
+import { useState } from 'react';
 import { CartIcon } from '@/assets/icons';
 import { CartItem } from '@/contexts/CartContext';
+import CheckoutForm from './CheckoutForm';
 
 interface CartModalProps {
   isOpen: boolean;
   onClose: () => void;
   cartItems: CartItem[];
-  onRemoveItem: (productId: number) => void;
-  onUpdateQuantity: (productId: number, quantity: number) => void;
+  onRemoveItem: (productId: number, selectedOptions?: Record<string, string>) => void;
+  onUpdateQuantity: (productId: number, quantity: number, selectedOptions?: Record<string, string>) => void;
 }
 
 export default function CartModal({ 
@@ -18,10 +20,20 @@ export default function CartModal({
   onRemoveItem,
   onUpdateQuantity 
 }: CartModalProps) {
+  const [isCheckoutOpen, setIsCheckoutOpen] = useState(false);
+
   if (!isOpen) return null;
 
   const subtotal = cartItems.reduce((sum, item) => sum + item.price * item.quantity, 0);
   const total = subtotal;
+
+  const handleCheckout = () => {
+    setIsCheckoutOpen(true);
+  };
+
+  const handleCloseCheckout = () => {
+    setIsCheckoutOpen(false);
+  };
 
   return (
     <>
@@ -67,8 +79,8 @@ export default function CartModal({
               <>
                 {/* Cart Items */}
                 <div className="space-y-4 mb-6">
-                  {cartItems.map((item) => (
-                    <div key={item.id} className="bg-white rounded-lg p-4 shadow-sm border border-gray-200">
+                  {cartItems.map((item, index) => (
+                    <div key={`${item.id}-${index}-${JSON.stringify(item.selectedOptions)}`} className="bg-white rounded-lg p-4 shadow-sm border border-gray-200">
                       <div className="flex gap-4">
                         {/* Item Image */}
                         <img 
@@ -80,12 +92,25 @@ export default function CartModal({
                         {/* Item Details */}
                         <div className="flex-1 min-w-0">
                           <h3 className="font-semibold text-primary mb-1">{item.name}</h3>
+                          
+                          {/* Selected Options */}
+                          {item.selectedOptions && Object.keys(item.selectedOptions).length > 0 && (
+                            <div className="text-xs text-highlight mb-2 space-y-0.5">
+                              {Object.entries(item.selectedOptions).map(([key, value]) => (
+                                <div key={key} className="flex gap-1">
+                                  <span className="font-medium">{key}:</span>
+                                  <span>{value}</span>
+                                </div>
+                              ))}
+                            </div>
+                          )}
+                          
                           <p className="text-sm text-highlight mb-2">${item.price.toFixed(2)}</p>
                           
                           {/* Quantity Controls */}
                           <div className="flex items-center gap-3">
                             <button
-                              onClick={() => onUpdateQuantity(item.id, Math.max(1, item.quantity - 1))}
+                              onClick={() => onUpdateQuantity(item.id, Math.max(1, item.quantity - 1), item.selectedOptions)}
                               className="w-8 h-8 flex items-center justify-center border border-gray-300 rounded hover:bg-gray-100 transition-colors text-highlight"
                             >
                               <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -94,7 +119,7 @@ export default function CartModal({
                             </button>
                             <span className="text-primary font-medium w-6 text-center">{item.quantity}</span>
                             <button
-                              onClick={() => onUpdateQuantity(item.id, item.quantity + 1)}
+                              onClick={() => onUpdateQuantity(item.id, item.quantity + 1, item.selectedOptions)}
                               className="w-8 h-8 flex items-center justify-center border border-gray-300 rounded hover:bg-gray-100 transition-colors text-highlight"
                             >
                               <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -107,7 +132,7 @@ export default function CartModal({
                         {/* Price and Remove */}
                         <div className="flex flex-col items-end justify-between">
                           <button
-                            onClick={() => onRemoveItem(item.id)}
+                            onClick={() => onRemoveItem(item.id, item.selectedOptions)}
                             className="text-red-500 hover:text-red-700 transition-colors p-1"
                             aria-label="Remove item"
                           >
@@ -137,7 +162,10 @@ export default function CartModal({
                 </div>
 
                 {/* Checkout Button */}
-                <button className="w-full bg-accent hover:opacity-90 text-secondary text-lg font-semibold py-4 rounded-lg transition-all duration-200 shadow-lg hover:shadow-xl mt-6">
+                <button 
+                  onClick={handleCheckout}
+                  className="w-full bg-accent hover:opacity-90 text-secondary text-lg font-semibold py-4 rounded-lg transition-all duration-200 shadow-lg hover:shadow-xl mt-6"
+                >
                   Continuar la orden
                 </button>
               </>
@@ -159,6 +187,14 @@ export default function CartModal({
           animation: slide-in 0.3s ease-out;
         }
       `}</style>
+
+      {/* Checkout Form */}
+      <CheckoutForm
+        isOpen={isCheckoutOpen}
+        onClose={handleCloseCheckout}
+        cartItems={cartItems}
+        total={total}
+      />
     </>
   );
 }

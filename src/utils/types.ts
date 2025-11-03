@@ -1,3 +1,8 @@
+export type ProductOption = {
+  name: string;
+  options: string[];
+}
+
 export type Product = {
   id: number;
   name: string;
@@ -6,4 +11,5 @@ export type Product = {
   rating: number;
   images: string[];
   reviews: number;
+  productOptions?: ProductOption[];
 }

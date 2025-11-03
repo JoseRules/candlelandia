@@ -2,7 +2,7 @@ export const products = [
   {
     id: 1,
     name: "Desierto",
-    description: "Vive la experiencia de un desierto en tu casa.",
+    description: "Vela artesanal decorada con suculentas, aroma suave y elegante, ideal para decoración del hogar.",
     price: 100.00,
     rating: 4.9,
     images: [
@@ -11,22 +11,44 @@ export const products = [
       "https://res.cloudinary.com/de3taspqp/image/upload/v1761606001/cmscffiumpbgdcvqlxz4.jpg", 
       "https://res.cloudinary.com/de3taspqp/image/upload/v1761606001/dq4x5ul4d1xyzewmcuco.jpg", 
     ],
-    reviews: 1
-  },/*
+    reviews: 1,
+    productOptions: [
+      {
+        name: "Aroma",
+        options: ["Café", "Vainilla"]
+      }
+    ]
+  },
   {
     id: 2,
-    name: "Rose Garden",
-    description: "Elegant rose petals combined with subtle jasmine notes for a romantic and luxurious ambiance.",
-    price: 29.99,
+    name: "Mística",
+    description: "Vela artesanal con hoja de oro y piedras energéticas. Cada vela es única, combina belleza, energía y armonía en un diseño sofisticado perfecto para regalar o decorar.",
+    price: 100.00,
     rating: 4.9,
     images: [
-      "https://res.cloudinary.com/de3taspqp/image/upload/v1760476763/owl03sq6pbqotkwbsmr5.png", 
-      "https://res.cloudinary.com/de3taspqp/image/upload/v1760476763/wv0nmfmymmns2vfko2bq.png", 
-      "https://res.cloudinary.com/de3taspqp/image/upload/v1760476763/o2yizrgtjdhwnmydcsxc.png", 
-      "https://res.cloudinary.com/de3taspqp/image/upload/v1760476764/njhinexc9mtvkxhxmx9p.png",  
+      "https://res.cloudinary.com/de3taspqp/image/upload/v1762173871/fdhmpetkjaws0pmk5cs5.jpg", 
+      "https://res.cloudinary.com/de3taspqp/image/upload/v1762173871/zxammejnt0qeptafave8.jpg", 
+      "https://res.cloudinary.com/de3taspqp/image/upload/v1762173871/y5bevdwb6ywoei7vq7z4.jpg", 
+      "https://res.cloudinary.com/de3taspqp/image/upload/v1762173871/gimqu9w1p3xc0kjmcneb.jpg",  
+      "https://res.cloudinary.com/de3taspqp/image/upload/v1762173871/zzrkeol3nbl1xlzp2kjd.jpg"
     ],
-    reviews: 89
+    reviews: 89,
+    productOptions: [
+      {
+        name: "Aroma",
+        options: ["Café", "Vainilla"]
+      },
+      {
+        name: "Hoja metálica",
+        options: ["Oro", "Plata", "Cobre"]
+      },
+      {
+        name: "Piedras energéticas",
+        options: ["Café", "Morado", "Blanco", "Rosa"]
+      }
+    ]
   },
+  /*
   {
     id: 3,
     name: "Ocean Breeze",

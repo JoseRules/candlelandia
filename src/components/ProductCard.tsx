@@ -1,14 +1,17 @@
 'use client'
+import { useState } from "react";
 import Image from "next/image";
 import StarRating from "./StartRating";
 import { CartIcon } from "@/assets/icons";
 import { useRouter } from "next/navigation";
 import { useCart } from "@/contexts/CartContext";
 import { Product } from "@/utils/types";
+import ProductOptionsModal from "./ProductOptionsModal";
 
 const ProductCard = ({ product }: { product: Product }) => {
   const router = useRouter();
   const { addToCart } = useCart();
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   const handleCardClick = () => {
     router.push(`/candle/${product.id}`);
@@ -16,7 +19,17 @@ const ProductCard = ({ product }: { product: Product }) => {
 
   const handleAddToCart = (e: React.MouseEvent) => {
     e.stopPropagation(); // Prevent triggering the card click
-    addToCart(product);
+    
+    // Check if product has options
+    if (product.productOptions && product.productOptions.length > 0) {
+      setIsModalOpen(true);
+    } else {
+      addToCart(product);
+    }
+  };
+
+  const handleAddToCartWithOptions = (selectedOptions: Record<string, string>) => {
+    addToCart(product, selectedOptions);
   };
 
   return (
@@ -59,6 +72,14 @@ const ProductCard = ({ product }: { product: Product }) => {
           </button>
         </div>
       </div>
+
+      {/* Product Options Modal */}
+      <ProductOptionsModal
+        product={product}
+        isOpen={isModalOpen}
+        onClose={() => setIsModalOpen(false)}
+        onAddToCart={handleAddToCartWithOptions}
+      />
     </div>
   );
 };

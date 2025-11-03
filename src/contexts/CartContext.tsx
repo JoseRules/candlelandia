@@ -5,13 +5,14 @@ import { Product } from '@/utils/types';
 
 export interface CartItem extends Product {
   quantity: number;
+  selectedOptions?: Record<string, string>;
 }
 
 interface CartContextType {
   cartItems: CartItem[];
-  addToCart: (product: Product) => void;
-  removeFromCart: (productId: number) => void;
-  updateQuantity: (productId: number, quantity: number) => void;
+  addToCart: (product: Product, selectedOptions?: Record<string, string>) => void;
+  removeFromCart: (productId: number, selectedOptions?: Record<string, string>) => void;
+  updateQuantity: (productId: number, quantity: number, selectedOptions?: Record<string, string>) => void;
   getTotalItems: () => number;
   confirmationItem: CartItem | null;
   isConfirmationOpen: boolean;
@@ -28,23 +29,29 @@ export function CartProvider({ children }: { children: ReactNode }) {
   const [isConfirmationOpen, setIsConfirmationOpen] = useState(false);
   const [isCartOpen, setIsCartOpen] = useState(false);
 
-  const addToCart = (product: Product) => {
+  const addToCart = (product: Product, selectedOptions?: Record<string, string>) => {
     setCartItems((prevItems) => {
-      const existingItem = prevItems.find((item) => item.id === product.id);
+      const existingItem = prevItems.find((item) => 
+        item.id === product.id && 
+        JSON.stringify(item.selectedOptions) === JSON.stringify(selectedOptions)
+      );
       let updatedItem: CartItem;
       
       if (existingItem) {
-        // If item already exists, increase quantity
+        // If item already exists with same options, increase quantity
         updatedItem = { ...existingItem, quantity: existingItem.quantity + 1 };
         const updatedItems = prevItems.map((item) =>
-          item.id === product.id ? updatedItem : item
+          item.id === product.id && 
+          JSON.stringify(item.selectedOptions) === JSON.stringify(selectedOptions)
+            ? updatedItem 
+            : item
         );
         setConfirmationItem(updatedItem);
         setIsConfirmationOpen(true);
         return updatedItems;
       } else {
         // If item doesn't exist, add it with quantity 1
-        updatedItem = { ...product, quantity: 1 };
+        updatedItem = { ...product, quantity: 1, selectedOptions };
         setConfirmationItem(updatedItem);
         setIsConfirmationOpen(true);
         return [...prevItems, updatedItem];
@@ -56,19 +63,27 @@ export function CartProvider({ children }: { children: ReactNode }) {
     setIsConfirmationOpen(false);
   };
 
-  const removeFromCart = (productId: number) => {
-    setCartItems((prevItems) => prevItems.filter((item) => item.id !== productId));
+  const removeFromCart = (productId: number, selectedOptions?: Record<string, string>) => {
+    setCartItems((prevItems) => 
+      prevItems.filter((item) => 
+        !(item.id === productId && 
+          JSON.stringify(item.selectedOptions) === JSON.stringify(selectedOptions))
+      )
+    );
   };
 
-  const updateQuantity = (productId: number, quantity: number) => {
+  const updateQuantity = (productId: number, quantity: number, selectedOptions?: Record<string, string>) => {
     if (quantity <= 0) {
-      removeFromCart(productId);
+      removeFromCart(productId, selectedOptions);
       return;
     }
     
     setCartItems((prevItems) =>
       prevItems.map((item) =>
-        item.id === productId ? { ...item, quantity } : item
+        item.id === productId && 
+        JSON.stringify(item.selectedOptions) === JSON.stringify(selectedOptions)
+          ? { ...item, quantity } 
+          : item
       )
     );
   };

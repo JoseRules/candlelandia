@@ -12,6 +12,7 @@ export default function CandlePage({params}: {params: Promise<{ id: string }>}) 
   const router = useRouter();
   const { addToCart } = useCart();
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
+  const [selectedOptions, setSelectedOptions] = useState<Record<string, string>>({});
 
   // Find the product by ID
   const product = products.find(p => p.id === parseInt(id));
@@ -43,6 +44,31 @@ export default function CandlePage({params}: {params: Promise<{ id: string }>}) 
     setCurrentImageIndex((prev) => 
       prev === product.images.length - 1 ? 0 : prev + 1
     );
+  };
+
+  const handleOptionChange = (optionName: string, value: string) => {
+    setSelectedOptions((prev) => ({
+      ...prev,
+      [optionName]: value,
+    }));
+  };
+
+  // Check if all options are selected
+  const areAllOptionsSelected = () => {
+    if (!product.productOptions || product.productOptions.length === 0) {
+      return true; // No options to select
+    }
+    return product.productOptions.every(
+      (option) => selectedOptions[option.name] && selectedOptions[option.name] !== ""
+    );
+  };
+
+  const handleAddToCart = () => {
+    if (product.productOptions && product.productOptions.length > 0) {
+      addToCart(product, selectedOptions);
+    } else {
+      addToCart(product);
+    }
   };
 
   return (
@@ -187,15 +213,52 @@ export default function CandlePage({params}: {params: Promise<{ id: string }>}) 
               </ul>
             </div>
 
+            {/* Product Options Dropdowns */}
+            {product.productOptions && product.productOptions.length > 0 && (
+              <div className="space-y-4 border-t border-gray-200 pt-6">
+                <h3 className="text-lg font-semibold text-primary">Opciones</h3>
+                {product.productOptions.map((option) => (
+                  <div key={option.name} className="space-y-2">
+                    <label htmlFor={option.name} className="block text-sm font-medium text-highlight">
+                      {option.name}
+                    </label>
+                    <select
+                      id={option.name}
+                      value={selectedOptions[option.name] || ""}
+                      onChange={(e) => handleOptionChange(option.name, e.target.value)}
+                      className="w-full px-4 py-3 border-2 border-gray-200 rounded-lg focus:outline-none focus:border-accent transition-colors text-primary bg-white"
+                    >
+                      <option value="">Selecciona {option.name}</option>
+                      {option.options.map((opt) => (
+                        <option key={opt} value={opt}>
+                          {opt}
+                        </option>
+                      ))}
+                    </select>
+                  </div>
+                ))}
+              </div>
+            )}
+
             {/* Add to Cart Button */}
             <div className="pt-6">
               <button 
-                onClick={() => addToCart(product)}
-                className="w-full flex items-center justify-center gap-3 bg-accent hover:opacity-90 text-white text-lg font-semibold px-8 py-4 rounded-lg transition-all duration-200 shadow-lg hover:shadow-xl transform hover:scale-105"
+                onClick={handleAddToCart}
+                disabled={!areAllOptionsSelected()}
+                className={`w-full flex items-center justify-center gap-3 text-white text-lg font-semibold px-8 py-4 rounded-lg transition-all duration-200 shadow-lg ${
+                  areAllOptionsSelected()
+                    ? 'bg-accent hover:opacity-90 hover:shadow-xl transform hover:scale-105 cursor-pointer'
+                    : 'bg-gray-400 cursor-not-allowed opacity-60'
+                }`}
               >
                 <CartIcon size={24} color="#ffffff" className="w-6 h-6" />
                 Agregar al carrito
               </button>
+              {!areAllOptionsSelected() && product.productOptions && product.productOptions.length > 0 && (
+                <p className="text-sm text-highlight mt-2 text-center">
+                  Por favor selecciona todas las opciones
+                </p>
+              )}
             </div>
 
             {/* Additional Info 

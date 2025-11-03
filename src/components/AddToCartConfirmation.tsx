@@ -64,6 +64,19 @@ export default function AddToCartConfirmation({
                 />
                 <div className="flex-1 min-w-0">
                   <h4 className="font-semibold text-primary mb-1">{product.name}</h4>
+                  
+                  {/* Selected Options */}
+                  {product.selectedOptions && Object.keys(product.selectedOptions).length > 0 && (
+                    <div className="text-xs text-highlight mb-1 space-y-0.5">
+                      {Object.entries(product.selectedOptions).map(([key, value]) => (
+                        <div key={key} className="flex gap-1">
+                          <span className="font-medium">{key}:</span>
+                          <span>{value}</span>
+                        </div>
+                      ))}
+                    </div>
+                  )}
+                  
                   <p className="text-sm text-highlight mb-1">Cantidad: {product.quantity}</p>
                   <p className="text-lg font-bold text-accent">
                     ${(product.price * product.quantity).toFixed(2)}
