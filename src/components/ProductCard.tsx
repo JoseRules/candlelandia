@@ -35,7 +35,7 @@ const ProductCard = ({ product }: { product: Product }) => {
   return (
     <div className="rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 overflow-hidden cursor-pointer" onClick={handleCardClick}>
       {/* Product Image */}
-      <div className="relative h-48">
+      <div className="relative h-80">
         <img src={product.images[0]} alt={product.name} className="object-cover w-full h-full" />
       </div>
       <div className="p-4">
