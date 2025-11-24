@@ -1,7 +1,8 @@
 'use client';
 
 import { useState } from 'react';
-import { CartItem } from '@/contexts/CartContext';
+import { useRouter } from 'next/navigation';
+import { CartItem, useCart } from '@/contexts/CartContext';
 
 interface CheckoutFormProps {
   isOpen: boolean;
@@ -16,6 +17,8 @@ export default function CheckoutForm({
   cartItems,
   total 
 }: CheckoutFormProps) {
+  const router = useRouter();
+  const { clearCart } = useCart();
   const [formData, setFormData] = useState({
     phone: '',
     email: '',
@@ -37,18 +40,43 @@ export default function CheckoutForm({
     e.preventDefault();
     setIsSubmitting(true);
 
-    // Simulate API call
-    await new Promise(resolve => setTimeout(resolve, 1000));
+    try {
+      const response = await fetch('/api/submit-order', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          phone: formData.phone,
+          email: formData.email,
+          notes: formData.notes,
+          cartItems: cartItems,
+          total: total,
+        }),
+      });
 
-    setIsSubmitting(false);
-    setIsSuccess(true);
+      const data = await response.json();
 
-    // Reset form and close after showing success message
-    setTimeout(() => {
-      setFormData({ phone: '', email: '', notes: '' });
-      setIsSuccess(false);
-      onClose();
-    }, 3000);
+      if (!response.ok) {
+        throw new Error(data.error || 'Failed to submit order');
+      }
+
+      setIsSubmitting(false);
+      setIsSuccess(true);
+
+      // Clear the cart and redirect to main page after showing success message
+      setTimeout(() => {
+        clearCart();
+        setFormData({ phone: '', email: '', notes: '' });
+        setIsSuccess(false);
+        onClose();
+        router.push('/');
+      }, 2000);
+    } catch (error) {
+      console.error('Error submitting order:', error);
+      setIsSubmitting(false);
+      alert('Error al enviar el pedido. Por favor, intenta de nuevo.');
+    }
   };
 
   const handleBackdropClick = (e: React.MouseEvent) => {
