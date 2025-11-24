@@ -48,7 +48,7 @@ export const products = [
       },
       {
         name: "Piedras energéticas",
-        options: ["Café", "Morado", "Blanco", "Rosa"]
+        options: ["Café", "Morado", "Blanco", "Rosa", "Azul"]
       }
     ]
   },

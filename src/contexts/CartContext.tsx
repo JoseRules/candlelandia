@@ -13,6 +13,7 @@ interface CartContextType {
   addToCart: (product: Product, selectedOptions?: Record<string, string>) => void;
   removeFromCart: (productId: number, selectedOptions?: Record<string, string>) => void;
   updateQuantity: (productId: number, quantity: number, selectedOptions?: Record<string, string>) => void;
+  clearCart: () => void;
   getTotalItems: () => number;
   confirmationItem: CartItem | null;
   isConfirmationOpen: boolean;
@@ -88,6 +89,10 @@ export function CartProvider({ children }: { children: ReactNode }) {
     );
   };
 
+  const clearCart = () => {
+    setCartItems([]);
+  };
+
   const getTotalItems = () => {
     return cartItems.reduce((total, item) => total + item.quantity, 0);
   };
@@ -99,6 +104,7 @@ export function CartProvider({ children }: { children: ReactNode }) {
         addToCart,
         removeFromCart,
         updateQuantity,
+        clearCart,
         getTotalItems,
         confirmationItem,
         isConfirmationOpen,
