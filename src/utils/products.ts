@@ -1,9 +1,9 @@
 export const products = [
   {
     id: 1,
-    name: "Desierto",
+    name: "Sucuvela",
     description: "Vela artesanal decorada con suculentas, aroma suave y elegante, ideal para decoración del hogar.",
-    price: 130.00,
+    price: 150.00,
     rating: 4.9,
     images: [
       "https://res.cloudinary.com/de3taspqp/image/upload/v1761606001/nyc3cojms2f2hzq1quo3.jpg", 
@@ -23,9 +23,12 @@ export const products = [
     id: 2,
     name: "Mística",
     description: "Vela artesanal con hoja de oro y piedras energéticas. Cada vela es única, combina belleza, energía y armonía en un diseño sofisticado perfecto para regalar o decorar.",
-    price: 130.00,
+    price: 150.00,
     rating: 4.9,
     images: [
+      "https://res.cloudinary.com/de3taspqp/image/upload/v1763990024/h4etdleh1fkz3wp4lltn.jpg",
+      "https://res.cloudinary.com/de3taspqp/image/upload/v1763990024/sobqrhg6rh04jtgaay0v.jpg",
+      "https://res.cloudinary.com/de3taspqp/image/upload/v1763990024/qb7c5jq2hhsswsblclja.jpg",
       "https://res.cloudinary.com/de3taspqp/image/upload/v1762173871/zzrkeol3nbl1xlzp2kjd.jpg",
       "https://res.cloudinary.com/de3taspqp/image/upload/v1762173871/fdhmpetkjaws0pmk5cs5.jpg", 
       "https://res.cloudinary.com/de3taspqp/image/upload/v1762173871/zxammejnt0qeptafave8.jpg", 
@@ -53,7 +56,7 @@ export const products = [
     id: 3,
     name: "Cofee Lover",
     description: "Vela artesanal con aroma a café, ideal para disfrutar de una tarde relajante y cómoda.",
-    price: 130.00,
+    price: 150.00,
     rating: 4.9,
     images: [
       "https://res.cloudinary.com/de3taspqp/image/upload/v1763921719/br4t9aa1orbjvbytp9jm.jpg", 
@@ -73,7 +76,7 @@ export const products = [
     id: 4,
     name: "Luz de Dahlia",
     description: "Vela artesanal con forma de dahlia, ideal para decorar el hogar.",
-    price: 130.00,
+    price: 150.00,
     rating: 4.9,
     images: [
       "https://res.cloudinary.com/de3taspqp/image/upload/v1763921719/d6roke1u3mbcljk2pkib.jpg", 
