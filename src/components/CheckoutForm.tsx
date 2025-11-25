@@ -181,7 +181,7 @@ export default function CheckoutForm({
                     required
                     value={formData.name}
                     onChange={handleChange}
-                    placeholder="Tu nombre completo"
+                    placeholder="Nombre completo"
                     className="w-full px-4 py-3 border-2 border-gray-200 rounded-lg focus:outline-none focus:border-accent transition-colors text-primary bg-white"
                   />
                 </div>
