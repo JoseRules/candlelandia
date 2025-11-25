@@ -20,6 +20,7 @@ export default function CheckoutForm({
   const router = useRouter();
   const { clearCart } = useCart();
   const [formData, setFormData] = useState({
+    name: '',
     phone: '',
     email: '',
     notes: ''
@@ -47,6 +48,7 @@ export default function CheckoutForm({
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
+          name: formData.name,
           phone: formData.phone,
           email: formData.email,
           notes: formData.notes,
@@ -67,7 +69,7 @@ export default function CheckoutForm({
       // Clear the cart and redirect to main page after showing success message
       setTimeout(() => {
         clearCart();
-        setFormData({ phone: '', email: '', notes: '' });
+        setFormData({ name: '', phone: '', email: '', notes: '' });
         setIsSuccess(false);
         onClose();
         router.push('/');
@@ -165,6 +167,23 @@ export default function CheckoutForm({
                       </p>
                     </div>
                   </div>
+                </div>
+
+                {/* Name */}
+                <div>
+                  <label htmlFor="name" className="block text-sm font-medium text-primary mb-2">
+                    Nombre <span className="text-red-500">*</span>
+                  </label>
+                  <input
+                    type="text"
+                    id="name"
+                    name="name"
+                    required
+                    value={formData.name}
+                    onChange={handleChange}
+                    placeholder="Tu nombre completo"
+                    className="w-full px-4 py-3 border-2 border-gray-200 rounded-lg focus:outline-none focus:border-accent transition-colors text-primary bg-white"
+                  />
                 </div>
 
                 {/* Phone Number */}
