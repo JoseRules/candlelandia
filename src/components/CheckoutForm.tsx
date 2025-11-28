@@ -102,7 +102,7 @@ export default function CheckoutForm({
           {!isSuccess ? (
             <>
               {/* Header */}
-              <div className="border-b border-gray-200 p-6">
+              <div className="p-6">
                 <div className="flex items-start justify-between">
                   <div>
                     <h2 className="text-2xl font-bold text-primary mb-2">
@@ -126,7 +126,7 @@ export default function CheckoutForm({
               </div>
 
               {/* Order Summary */}
-              <div className="p-6 border-b border-gray-200 bg-white">
+              <div className="p-6 bg-background">
                 <h3 className="font-semibold text-primary mb-3">Resumen de tu pedido</h3>
                 <div className="space-y-2 mb-3">
                   {cartItems.map((item, index) => (
@@ -146,7 +146,7 @@ export default function CheckoutForm({
                     </div>
                   ))}
                 </div>
-                <div className="flex justify-between text-lg font-bold text-primary pt-3 border-t border-gray-200">
+                <div className="flex justify-between text-lg font-bold text-primary pt-3 border-t border-highlight/50">
                   <span>Total</span>
                   <span className="text-accent">${total.toFixed(2)}</span>
                 </div>

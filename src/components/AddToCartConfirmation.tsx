@@ -55,7 +55,7 @@ export default function AddToCartConfirmation({
               Articulo agregado al carrito!
             </h3>
             
-            <div className="bg-white rounded-lg p-4 mb-4 shadow-sm border border-gray-200">
+            <div className="bg-background rounded-lg p-4 mb-4 shadow-sm ">
               <div className="flex gap-3">
                 <img 
                   src={product.images[0]} 
@@ -67,7 +67,7 @@ export default function AddToCartConfirmation({
                   
                   {/* Selected Options */}
                   {product.selectedOptions && Object.keys(product.selectedOptions).length > 0 && (
-                    <div className="text-xs text-highlight mb-1 space-y-0.5">
+                    <div className="text-xs text-primary mb-1 space-y-0.5">
                       {Object.entries(product.selectedOptions).map(([key, value]) => (
                         <div key={key} className="flex gap-1">
                           <span className="font-medium">{key}:</span>
@@ -77,7 +77,7 @@ export default function AddToCartConfirmation({
                     </div>
                   )}
                   
-                  <p className="text-sm text-highlight mb-1">Cantidad: {product.quantity}</p>
+                  <p className="text-sm text-primary mb-1">Cantidad: {product.quantity}</p>
                   <p className="text-lg font-bold text-accent">
                     ${(product.price * product.quantity).toFixed(2)}
                   </p>
@@ -86,7 +86,7 @@ export default function AddToCartConfirmation({
             </div>
 
             {/* Buttons */}
-            <div className="flex gap-3">
+            <div className="flex gap-3 flex-col md:flex-row">
               <button
                 onClick={onClose}
                 className="flex-1 bg-gray-200 hover:bg-gray-300 text-primary font-medium py-3 rounded-lg transition-colors duration-200"

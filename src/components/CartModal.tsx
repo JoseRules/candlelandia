@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { CartIcon } from '@/assets/icons';
 import { CartItem } from '@/contexts/CartContext';
 import CheckoutForm from './CheckoutForm';
@@ -21,6 +21,31 @@ export default function CartModal({
   onUpdateQuantity 
 }: CartModalProps) {
   const [isCheckoutOpen, setIsCheckoutOpen] = useState(false);
+
+  // Prevent body scrolling when modal is open
+  useEffect(() => {
+    if (isOpen) {
+      // Save current scroll position
+      const scrollY = window.scrollY;
+      
+      // Prevent scrolling on both body and html elements
+      document.body.style.position = 'fixed';
+      document.body.style.top = `-${scrollY}px`;
+      document.body.style.width = '100%';
+      document.body.style.overflow = 'hidden';
+      document.documentElement.style.overflow = 'hidden';
+      
+      // Cleanup function to restore scrolling
+      return () => {
+        document.body.style.position = '';
+        document.body.style.top = '';
+        document.body.style.width = '';
+        document.body.style.overflow = '';
+        document.documentElement.style.overflow = '';
+        window.scrollTo(0, scrollY);
+      };
+    }
+  }, [isOpen]);
 
   if (!isOpen) return null;
 
@@ -44,9 +69,12 @@ export default function CartModal({
       />
       
       {/* Modal */}
-      <div className="fixed inset-0 z-50 flex items-start justify-end">
-        <div className="bg-foreground w-full max-w-lg h-full overflow-y-auto animate-slide-in">
-          <div className="sticky top-0 border-b border-gray-200 p-6 flex items-center justify-between z-10">
+      <div className="fixed inset-0 z-50 flex items-start justify-end pointer-events-none">
+        <div 
+          className="bg-foreground w-full max-w-lg h-full overflow-y-auto animate-slide-in pointer-events-auto"
+          onClick={(e) => e.stopPropagation()}
+        >
+          <div className="sticky top-0 border-b border-highlight p-6 flex items-center justify-between z-10">
             <h2 className="text-2xl font-bold text-primary flex items-center gap-2">
               <CartIcon size={24} color="#3a3122" className="w-6 h-6" />
               Carrito de compras
@@ -80,7 +108,7 @@ export default function CartModal({
                 {/* Cart Items */}
                 <div className="space-y-4 mb-6">
                   {cartItems.map((item, index) => (
-                    <div key={`${item.id}-${index}-${JSON.stringify(item.selectedOptions)}`} className="bg-white rounded-lg p-4 shadow-sm border border-gray-200">
+                    <div key={`${item.id}-${index}-${JSON.stringify(item.selectedOptions)}`} className="bg-background rounded-lg p-4 shadow-sm ">
                       <div className="flex gap-4">
                         {/* Item Image */}
                         <img 
@@ -150,12 +178,12 @@ export default function CartModal({
                 </div>
 
                 {/* Summary */}
-                <div className="border-t border-gray-200 pt-6 space-y-3">
+                <div className="border-t border-highlight/50 pt-6 space-y-3">
                   <div className="flex justify-between text-highlight">
                     <span>Subtotal</span>
                     <span>${subtotal.toFixed(2)}</span>
                   </div>
-                  <div className="flex justify-between text-xl font-bold text-primary pt-3 border-t border-gray-200">
+                  <div className="flex justify-between text-xl font-bold text-primary pt-3 border-t border-highlight/50">
                     <span>Total</span>
                     <span>${total.toFixed(2)}</span>
                   </div>
@@ -164,7 +192,7 @@ export default function CartModal({
                 {/* Checkout Button */}
                 <button 
                   onClick={handleCheckout}
-                  className="w-full bg-accent hover:opacity-90 text-secondary text-lg font-semibold py-4 rounded-lg transition-all duration-200 shadow-lg hover:shadow-xl mt-6"
+                  className="w-full bg-accent hover:opacity-90 text-gray-200 text-lg font-semibold py-4 rounded-lg transition-all duration-200 shadow-lg hover:shadow-xl mt-6"
                 >
                   Continuar la orden
                 </button>
