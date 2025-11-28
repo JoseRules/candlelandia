@@ -20,6 +20,31 @@ const ProductOptionsModal = ({ product, isOpen, onClose, onAddToCart }: ProductO
     }
   }, [isOpen]);
 
+  // Prevent body scrolling when modal is open
+  useEffect(() => {
+    if (isOpen) {
+      // Save current scroll position
+      const scrollY = window.scrollY;
+      
+      // Prevent scrolling on both body and html elements
+      document.body.style.position = 'fixed';
+      document.body.style.top = `-${scrollY}px`;
+      document.body.style.width = '100%';
+      document.body.style.overflow = 'hidden';
+      document.documentElement.style.overflow = 'hidden';
+      
+      // Cleanup function to restore scrolling
+      return () => {
+        document.body.style.position = '';
+        document.body.style.top = '';
+        document.body.style.width = '';
+        document.body.style.overflow = '';
+        document.documentElement.style.overflow = '';
+        window.scrollTo(0, scrollY);
+      };
+    }
+  }, [isOpen]);
+
   if (!isOpen) return null;
 
   const handleOptionChange = (optionName: string, value: string) => {
@@ -66,7 +91,7 @@ const ProductOptionsModal = ({ product, isOpen, onClose, onAddToCart }: ProductO
           onClick={(e) => e.stopPropagation()}
         >
           {/* Header */}
-          <div className="sticky top-0 bg-foreground border-b border-gray-200 p-6 flex items-start justify-between rounded-t-2xl">
+          <div className="top-0 bg-foreground p-6 pb-0 flex items-start justify-between rounded-t-2xl">
             <div className="flex-1">
               <h2 className="text-2xl font-bold text-primary mb-1">
                 {product.name}
@@ -103,15 +128,15 @@ const ProductOptionsModal = ({ product, isOpen, onClose, onAddToCart }: ProductO
             Selecciona las opciones:
           </h3>
           {product.productOptions?.map((option) => (
-            <div key={option.name} className="space-y-2">
-              <label htmlFor={`modal-${option.name}`} className="block text-sm font-medium text-highlight">
+            <div key={option.name}>
+              <label htmlFor={`modal-${option.name}`} className="block text-sm font-medium text-primary mb-2">
                 {option.name} <span className="text-red-500">*</span>
               </label>
               <select
                 id={`modal-${option.name}`}
                 value={selectedOptions[option.name] || ""}
                 onChange={(e) => handleOptionChange(option.name, e.target.value)}
-                className="w-full px-4 py-3 border-2 border-gray-200 rounded-lg focus:outline-none focus:border-accent transition-colors text-primary bg-white"
+                className="w-full px-4 py-3 border-2 border-primary/20 rounded-lg focus:outline-none focus:border-accent transition-colors text-primary bg-background"
               >
                 <option value="">Selecciona {option.name}</option>
                 {option.options.map((opt) => (
@@ -125,11 +150,11 @@ const ProductOptionsModal = ({ product, isOpen, onClose, onAddToCart }: ProductO
         </div>
 
         {/* Footer */}
-        <div className="sticky bottom-0 bg-foreground border-t border-gray-200 p-6 space-y-3 rounded-b-2xl">
+        <div className="bottom-0 bg-foreground p-6 space-y-3 rounded-b-2xl">
           <button
             onClick={handleAddToCart}
             disabled={!areAllOptionsSelected()}
-            className={`w-full flex items-center justify-center gap-3 text-lg font-semibold px-8 py-4 rounded-lg transition-all duration-200 shadow-lg ${
+            className={`w-full flex items-center justify-center gap-3 text-lg font-semibold px-4 py-4 rounded-lg transition-all duration-200 shadow-lg ${
               areAllOptionsSelected()
                 ? 'bg-accent hover:opacity-90 text-white hover:shadow-xl cursor-pointer'
                 : 'bg-gray-400 text-white cursor-not-allowed opacity-60'
