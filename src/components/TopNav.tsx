@@ -1,6 +1,6 @@
 'use client';
 
-import { CandleIcon, CartIcon } from '@/assets/icons';
+import { CartIcon, Logo } from '@/assets/icons';
 import { useCart } from '@/contexts/CartContext';
 import CartModal from './CartModal';
 
@@ -13,12 +13,12 @@ export default function TopNav() {
       <nav className="shadow-sm">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center h-16">
-            <div className="flex items-center space-x-3">
+            <div className="flex items-center space-x-1">
               <div className="flex-shrink-0">
-                <CandleIcon size={32} color="#3a3122"className="w-12 h-12" />
+                <Logo size={50} color="#3a3122" className="w-12 h-12" />
               </div>
               <h1 className="text-xl font-bold text-primary">
-                Candlelandia
+                GDL Glow
               </h1>
             </div>
             <button
